@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -15,6 +15,8 @@
 		42F11AAF262677C30079CE7B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 42F11AAD262677C30079CE7B /* LaunchScreen.storyboard */; };
 		42F11ABA262677C30079CE7B /* TestCloudKitFeatureFlagsiOSTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42F11AB9262677C30079CE7B /* TestCloudKitFeatureFlagsiOSTests.swift */; };
 		42F11AC5262677C30079CE7B /* TestCloudKitFeatureFlagsiOSUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42F11AC4262677C30079CE7B /* TestCloudKitFeatureFlagsiOSUITests.swift */; };
+		42F11AD72627AF580079CE7B /* CloudKitFeatureFlags in Frameworks */ = {isa = PBXBuildFile; productRef = 42F11AD62627AF580079CE7B /* CloudKitFeatureFlags */; };
+		42F11AE42627B0060079CE7B /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 42F11AE32627B0060079CE7B /* CloudKit.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +51,8 @@
 		42F11AC0262677C30079CE7B /* TestCloudKitFeatureFlagsiOSUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TestCloudKitFeatureFlagsiOSUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		42F11AC4262677C30079CE7B /* TestCloudKitFeatureFlagsiOSUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestCloudKitFeatureFlagsiOSUITests.swift; sourceTree = "<group>"; };
 		42F11AC6262677C30079CE7B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		42F11ADB2627AFD20079CE7B /* TestCloudKitFeatureFlagsiOS.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = TestCloudKitFeatureFlagsiOS.entitlements; sourceTree = "<group>"; };
+		42F11AE32627B0060079CE7B /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,6 +60,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				42F11AD72627AF580079CE7B /* CloudKitFeatureFlags in Frameworks */,
+				42F11AE42627B0060079CE7B /* CloudKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -83,6 +89,7 @@
 				42F11AB8262677C30079CE7B /* TestCloudKitFeatureFlagsiOSTests */,
 				42F11AC3262677C30079CE7B /* TestCloudKitFeatureFlagsiOSUITests */,
 				42F11AA0262677C20079CE7B /* Products */,
+				42F11AE22627B0060079CE7B /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -99,6 +106,7 @@
 		42F11AA1262677C20079CE7B /* TestCloudKitFeatureFlagsiOS */ = {
 			isa = PBXGroup;
 			children = (
+				42F11ADB2627AFD20079CE7B /* TestCloudKitFeatureFlagsiOS.entitlements */,
 				42F11AA2262677C20079CE7B /* AppDelegate.swift */,
 				42F11AA4262677C20079CE7B /* SceneDelegate.swift */,
 				42F11AA6262677C20079CE7B /* ContentView.swift */,
@@ -136,6 +144,14 @@
 			path = TestCloudKitFeatureFlagsiOSUITests;
 			sourceTree = "<group>";
 		};
+		42F11AE22627B0060079CE7B /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				42F11AE32627B0060079CE7B /* CloudKit.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -152,6 +168,9 @@
 			dependencies = (
 			);
 			name = TestCloudKitFeatureFlagsiOS;
+			packageProductDependencies = (
+				42F11AD62627AF580079CE7B /* CloudKitFeatureFlags */,
+			);
 			productName = TestCloudKitFeatureFlagsiOS;
 			productReference = 42F11A9F262677C20079CE7B /* TestCloudKitFeatureFlagsiOS.app */;
 			productType = "com.apple.product-type.application";
@@ -223,6 +242,9 @@
 				Base,
 			);
 			mainGroup = 42F11A96262677C20079CE7B;
+			packageReferences = (
+				42F11AD52627AF580079CE7B /* XCRemoteSwiftPackageReference "CloudKitFeatureFlags" */,
+			);
 			productRefGroup = 42F11AA0262677C20079CE7B /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -436,6 +458,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = TestCloudKitFeatureFlagsiOS/TestCloudKitFeatureFlagsiOS.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"TestCloudKitFeatureFlagsiOS/Preview Content\"";
 				DEVELOPMENT_TEAM = 7G2XZXD8B4;
@@ -447,8 +470,10 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.rmalhotra.TestCloudKitFeatureFlagsiOS;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTS_MACCATALYST = YES;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = "1,2,6";
 			};
 			name = Debug;
 		};
@@ -457,6 +482,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = TestCloudKitFeatureFlagsiOS/TestCloudKitFeatureFlagsiOS.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_ASSET_PATHS = "\"TestCloudKitFeatureFlagsiOS/Preview Content\"";
 				DEVELOPMENT_TEAM = 7G2XZXD8B4;
@@ -468,8 +494,10 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.rmalhotra.TestCloudKitFeatureFlagsiOS;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTS_MACCATALYST = YES;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = "1,2,6";
 			};
 			name = Release;
 		};
@@ -597,6 +625,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		42F11AD52627AF580079CE7B /* XCRemoteSwiftPackageReference "CloudKitFeatureFlags" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/codeOfRobin/CloudKitFeatureFlags";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		42F11AD62627AF580079CE7B /* CloudKitFeatureFlags */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 42F11AD52627AF580079CE7B /* XCRemoteSwiftPackageReference "CloudKitFeatureFlags" */;
+			productName = CloudKitFeatureFlags;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 42F11A97262677C20079CE7B /* Project object */;
 }
