@@ -11,7 +11,7 @@ import CloudKit
 import Combine
 
 @main
-class AppDelegate: UIResponder, UIApplicationDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterDelegate {
 
     //Sub in your own container ID for testing
     let container = CKContainer(identifier: "iCloud.com.rmalhotra.CloudKitTrial")
@@ -22,38 +22,36 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     lazy var subscription = CKQuerySubscription(recordType: "FeatureFlag", predicate: predicate, options: [.firesOnRecordUpdate])
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        let notificationInfo = CKSubscription.NotificationInfo()
-        notificationInfo.shouldBadge = false;
-        notificationInfo.shouldSendContentAvailable = true;
-        subscription.notificationInfo = notificationInfo
-        container.publicCloudDatabase.save(subscription) { (subscription, error) in
-            print(error)
-            print(subscription)
-        }
-        
+    
+        UNUserNotificationCenter.current().delegate = self
         UNUserNotificationCenter.current().requestAuthorization(options: [.alert]) { (registered, error) in
             DispatchQueue.main.async {
                 application.registerForRemoteNotifications()
             }
         }
-        
-//        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
-//            self.container.publicCloudDatabase.fetch(withRecordID: CKRecord.ID.init(recordName: "testFeatureFlag1"), completionHandler: { [self]
-//                record, error in
-//                
-//                //Updating a record here
-//                record?.setValue(0.2, forKey: "rollout")
-//                container.publicCloudDatabase.save(record!) { (record, error) in
-//                    print(record)
-//                }
-//            })
-//        }
         return true
     }
     
     func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
-    
+        
+        container.publicCloudDatabase.fetchAllSubscriptions { subscriptions, error in
+            if subscriptions?.isEmpty == true {
+                let notificationInfo = CKSubscription.NotificationInfo()
+                notificationInfo.shouldBadge = false;
+                notificationInfo.desiredKeys = ["rollout", "featureFlagUUID", "value"]
+                notificationInfo.shouldSendContentAvailable = true;
+                self.subscription.notificationInfo = notificationInfo
+                self.container.publicCloudDatabase.save(self.subscription) { (subscription, error) in
+                    print(error)
+                    print(subscription)
+                }
+            }
+        }
     }
+    
+    func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+        completionHandler([.banner])
+      }
     func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {
         
     }
